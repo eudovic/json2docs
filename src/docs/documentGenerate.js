@@ -45,7 +45,7 @@
  *                                     example: "Hello!"
  *               template:
  *                 type: string
- *                 example: "Name: <<dev.name>> <<[start_loop|dev.contacts]>> - contact by <<type>>, <<[start_loop|interactions]>> \n <<date>> - <<contact>>  <<[end_loop|interactions]>><<[end_loop|dev.contacts]>>"
+ *                 example: "Name: <<dev.name>> <<[start_loop|dev.contacts]>> - contact by <<type>>, <<[start_loop|dev.contacts.interactions]>> \n <<dev.contacts.interactions.date>> - <<dev.contacts.interactions.contact>>  <<[end_loop|dev.contacts.interactions]>><<[end_loop|dev.contacts]>>"
  *               map:
  *                 type: object
  *                 properties:

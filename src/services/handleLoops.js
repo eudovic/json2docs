@@ -4,14 +4,14 @@ import { replaceVariables } from './replaceVariables.js';
 const handleLoops = (template, data, map = false) => {
     const loopRegex = /<<\[start_loop\|([\w.]+)]>>([\s\S]*?)<<\[end_loop\|\1]>>/gs;
 
-    return template.replace(loopRegex, (match, entity, content) => {
-        const objectToLoop = arrayValueFromKey(entity, data);
+    return template.replace(loopRegex, (match, keyString, content) => {
+        const objectLoop = arrayValueFromKey(keyString, data);
 
-        if (!objectToLoop || !Array.isArray(objectToLoop)) {
+        if (!objectLoop || !Array.isArray(objectLoop)) {
             return match;
         }
 
-        return objectToLoop
+        return objectLoop
             .map(item => {
                 const processedContent = handleLoops(content, item, map);
                 return replaceVariables(processedContent, item, map);

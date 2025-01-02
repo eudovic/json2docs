@@ -26,40 +26,49 @@
 ### Input
 **Template**:
 ```plaintext
-Name: <<dev.name>>
-<<[start_loop|dev.contacts]>>
-- Contact Type: <<type>>, Number: <<contact>>
-  <<[start_loop|interactions]>>
-  Date: <<date>> - Message: <<contact>>
-  <<[end_loop|interactions]>>
-<<[end_loop|dev.contacts]>>
+Name: <<dev.name>> <<[start_loop|dev.contacts]>> - contact by <<dev.contacts.type>>, <<[start_loop|dev.contacts.interactions]>> Data:<<dev.contacts.interactions.date>> - Contato: <<dev.contacts.interactions.contact>> \n <<[end_loop|dev.contacts.interactions]>><<[end_loop|dev.contacts]>>
 ```
 
 Data:
 ```json
 {
-  "dev": {
-    "name": "Emerson Udovic",
-    "contacts": [
-      {
-        "type": "phone",
-        "contact": "xx-981xx-038x",
-        "interactions": [
-          { "date": "2024-12-21 05:31:07", "contact": "Hello!" },
-          { "date": "2024-12-21 05:31:30", "contact": "Go to sleep guy" }
-        ]
-      }
-    ]
-  }
+    "data": {
+        "dev": {
+            "name": "Emerson Udovic",
+            "contacts": [
+                {
+                    "type": "phone",
+                    "contact": "xx-981xx-038x",
+                    "interactions": [
+                        {
+                            "date": "2024-12-21 05:31:07",
+                            "contact": "Hello!"
+                        },
+                        {
+                            "date": "2024-12-21 05:31:030",
+                            "contact": "Go to sleep guy"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "template": "Name: <<dev.name>> <<[start_loop|dev.contacts]>> - contact by <<dev.contacts.type>>, <<[start_loop|dev.contacts.interactions]>> Data:<<dev.contacts.interactions.date>> - Contato: <<dev.contacts.interactions.contact>> \n <<[end_loop|dev.contacts.interactions]>><<[end_loop|dev.contacts]>>",
+    "map": {
+        "replace": {
+            "dev.name": "<b><<dev.name>></b>",
+            "dev.contacts.interactions.date": "Replaced Date <<dev.contacts.interactions.date>>"
+        }
+    }
 }
 ```
 
 Output:
-```
-Name: Emerson Udovic
-- Contact Type: phone, Number: xx-981xx-038x
-  Date: 2024-12-21 05:31:07 - Message: Hello!
-  Date: 2024-12-21 05:31:30 - Message: Go to sleep guy
+```json
+{
+    "success": true,
+    "finalResult": "Name: <b>Emerson Udovic</b>  - contact by phone,  Data:Replaced Date 2024-12-21 05:31:07 - Contato: Hello! \n  Data:Replaced Date 2024-12-21 05:31:030 - Contato: Go to sleep guy \n "
+}
 ```
 
 ## API Reference

@@ -9,9 +9,7 @@ const { decode } = he;
 const generateDocument = (req, res) => {
     try {
         const { template, data, map } = req.body;
-        
         validateInputs(template, data, map);     
-
         const decodedTemplate = decode(template);
         
         const result = handleLoops(decodedTemplate, data, map);    

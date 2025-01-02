@@ -23,9 +23,9 @@ This API dynamically generates documents based on customizable templates and str
 Name: <<dev.name>>
 <<[start_loop|dev.contacts]>>
 - Contact Type: <<type>>, Number: <<contact>>
-  <<[start_loop|interactions]>>
-  Date: <<date>> - Message: <<contact>>
-  <<[end_loop|interactions]>>
+  <<[start_loop|dev.contacts.interactions]>>
+  Date: <<dev.contacts.interactionsdate>> - Message: <<dev.contacts.interactions.contact>>
+  <<[end_loop|dev.contacts.interactions]>>
 <<[end_loop|dev.contacts]>>
 \`\`\`
 

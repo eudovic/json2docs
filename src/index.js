@@ -5,8 +5,8 @@ import setupSwagger from './swagger.js';
 const app = express();
 const port = 3000;
 
-app.use(json());
-
+app.use(json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 // Configura as rotas
 app.use('/api', api);
 setupSwagger(app);
