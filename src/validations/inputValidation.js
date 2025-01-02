@@ -1,10 +1,5 @@
 const validateInputs = (template, data, map) => {
-    if (!template || !data) {
-        const error = new Error('Template and data are required.');
-        error.statusCode = 400;
-        throw error;
-    }
-    if (typeof template !== 'string') {
+     if (typeof template !== 'string') {
         const error = new Error('Template must be a string.');
         error.statusCode = 400;
         throw error;
