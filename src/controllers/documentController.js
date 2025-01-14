@@ -12,9 +12,15 @@ const generateDocument = (req, res) => {
         validateInputs(template, data, map);     
         const decodedTemplate = decode(template);
         
-        const result = handleLoops(decodedTemplate, data, map);    
+        const loopResult = handleLoops(decodedTemplate, data, map);    
         
-        const finalResult = replaceVariables(result, data, map);
+       
+
+        let finalResult = replaceVariables(loopResult, data, map);
+
+        const pattern = /<<([\w.]+)>>/g;
+        finalResult = finalResult.replace(pattern, '');
+
 
         return res.status(200).json({ success: true, finalResult });
     } catch (error) {       
