@@ -15,7 +15,8 @@ const replaceVariables = (template, data, map) => {
             return replaceVariables(replaceMap[keyString], data, false);
         }
 
-        return arrayValueFromKey(keyString, data, map);
+        const value = arrayValueFromKey(keyString, data, map);
+        return value === null || value == '' ? match : value;
     });
 };
 
