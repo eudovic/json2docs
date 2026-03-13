@@ -1,0 +1,10 @@
+services:
+  node:
+    image: node:18.14.2
+    container_name: json2pdf-node
+    working_dir: /usr/src/app
+    volumes:
+      - ./app:/usr/src/app
+    ports:
+      - "${PORT}:3000"
+    command: sh -c "npm install && npm start"
